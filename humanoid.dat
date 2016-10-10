@@ -1,0 +1,5 @@
+robot_id = 50
+scene_id = 0 
+tcp_port = 7654
+seedfile = "../data/seeds/50/50s_initial.dat"
+

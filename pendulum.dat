@@ -1,0 +1,4 @@
+robot_id = 90
+scene_id = 0 
+tcp_port = 8000
+
