@@ -95,7 +95,6 @@ public:
         control.set_control_parameter(parameter_set.get(0));
     }
 
-    void setup() {}
     bool loop();
     void finish();
     void draw(const pref&) const ;
