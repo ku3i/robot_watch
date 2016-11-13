@@ -21,6 +21,7 @@
 #include <common/event_manager.h>
 #include <common/log_messages.h>
 #include <common/basic.h>
+#include <midi/midi_in.h>
 
 #include <robots/robot.h>
 #include <robots/simloid.h>
@@ -32,10 +33,10 @@
 #include "./setting.h"
 
 class Puppet_Master {
-    robots::Simloid& robot;
-          std::size_t        body_id;
-    const std::size_t        num_bodies;
-    Vector3                  force;
+    robots::Simloid&  robot;
+          std::size_t body_id;
+    const std::size_t num_bodies;
+    Vector3           force;
 
 public:
     Puppet_Master(robots::Simloid& robot, std::size_t num_bodies) : robot(robot), body_id(0), num_bodies(num_bodies), force(.0) {}
@@ -80,6 +81,7 @@ public:
     , control(robot)
     , parameter_set(1)
     , joystick()
+    , midi(1)
     , puppet_master(robot, robot.get_number_of_bodies())
     , robot_graphics(robot)
     , spinalcord_watch(robot, 200)
@@ -110,6 +112,7 @@ private:
     control::Jointcontrol    control;
     control::Control_Vector  parameter_set;
     Joystick                 joystick;
+    MidiIn                   midi;
     Puppet_Master            puppet_master;
 
     /* drawings */

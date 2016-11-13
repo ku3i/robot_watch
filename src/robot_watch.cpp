@@ -62,6 +62,8 @@ Application::loop(void)
 
     control.loop();
     simloid_status |= robot.update();
+    midi.fetch();
+
 
     robot_graphics.execute_cycle();
     spinalcord_watch.execute_cycle(cycles);

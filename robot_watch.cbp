@@ -37,6 +37,7 @@
 			<Add library="GL" />
 			<Add library="GLU" />
 			<Add library="glut" />
+			<Add library="asound" />
 			<Add directory="../framework/src" />
 			<Add directory="../framework/bin/Release" />
 		</Linker>
