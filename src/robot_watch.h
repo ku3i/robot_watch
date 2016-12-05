@@ -15,7 +15,7 @@
 #include <sys/time.h>
 #include <signal.h>
 #include <vector>
-#include <tr1/functional>
+#include <functional>
 
 #include <common/application_interface.h>
 #include <common/event_manager.h>
@@ -90,8 +90,8 @@ public:
     , restore_state(true)
     {
         /* register key event */
-        event.register_user_callback_key_pressed (std::tr1::bind(&Application::user_callback_key_pressed , this, std::tr1::placeholders::_1));
-        event.register_user_callback_key_released(std::tr1::bind(&Application::user_callback_key_released, this, std::tr1::placeholders::_1));
+        event.register_user_callback_key_pressed (std::bind(&Application::user_callback_key_pressed , this, std::placeholders::_1));
+        event.register_user_callback_key_released(std::bind(&Application::user_callback_key_released, this, std::placeholders::_1));
 
         parameter_set.add(settings.seedfile);
         control.set_control_parameter(parameter_set.get(0));
