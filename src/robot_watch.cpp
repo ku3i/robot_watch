@@ -21,9 +21,11 @@ DEFINE_GLOBALS()
 void
 Application::draw(const pref& p) const
 {
-    robot_graphics.draw(p);
-    spinalcord_watch.draw(p);
-    control_graphics.draw(p);
+    if (!minimal) {
+        robot_graphics.draw(p);
+        spinalcord_watch.draw(p);
+        control_graphics.draw(p);
+    }
 }
 
 void
@@ -31,6 +33,7 @@ Application::user_callback_key_pressed(SDL_Keysym &keysym)
 {
     switch (keysym.sym)
     {
+        case SDLK_F1 : minimal = !minimal; break;
         case SDLK_F2 : if (not restore_state) restore_state = true; break;
         case SDLK_F5 : parameter_set.reload(0, settings.seedfile);
                        control.set_control_parameter(parameter_set.get(0));

@@ -93,7 +93,11 @@ public:
         event.register_user_callback_key_pressed (std::bind(&Application::user_callback_key_pressed , this, std::placeholders::_1));
         event.register_user_callback_key_released(std::bind(&Application::user_callback_key_released, this, std::placeholders::_1));
 
-        parameter_set.add(settings.seedfile);
+        if (settings.seedfile != "")
+            parameter_set.add(settings.seedfile);
+        else
+            parameter_set.add(initialize_anyhow(robot, control, true, settings.pdm, settings.seedfile));
+
         control.set_control_parameter(parameter_set.get(0));
     }
 
@@ -123,6 +127,7 @@ private:
 
     uint64_t                 cycles;
     bool                     restore_state;
+    bool                     minimal = false;
 };
 
 #endif /*MAIN_H*/

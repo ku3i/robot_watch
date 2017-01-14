@@ -14,6 +14,7 @@ public:
     std::size_t robot_id;
     std::size_t scene_id;
     std::size_t tcp_port;
+    control::Minimal_Seed_t pdm;
 
     std::string seedfile;
 
@@ -22,7 +23,8 @@ public:
     , robot_id(read_uint("robot_id", 31  ))
     , scene_id(read_uint("scene_id", 0   ))
     , tcp_port(read_uint("tcp_port", 9876))
-    , seedfile(read_str ("seedfile", "../data/seeds/" + std::to_string(robot_id) + "/" + std::to_string(robot_id) + "s_initial.dat"))
+    , pdm     (read_vec ("pdm", {0.,-0.2,1.}))
+    , seedfile(read_str ("seedfile", "")) //../data/seeds/" + std::to_string(robot_id) + "/" + std::to_string(robot_id) + "s_initial.dat"))
     {}
 };
 
