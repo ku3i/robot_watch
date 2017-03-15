@@ -63,7 +63,7 @@ Application::loop(void)
         restore_state = false;
     }
 
-    control.loop();
+    control.execute_cycle();
     simloid_status |= robot.update();
     midi.fetch();
 
