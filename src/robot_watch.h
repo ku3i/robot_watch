@@ -1,23 +1,10 @@
-#ifndef MAIN_H
-#define MAIN_H
+/*---------------------------------+
+ | Matthias Kubisch                |
+ | kubisch@informatik.hu-berlin.de |
+ | July 2017                       |
+ +---------------------------------*/
 
-#include <cstdio>
-#include <cstdlib>
-#include <cstdarg>
-#include <unistd.h>
-
-#include <ctime>
-#include <cmath>
-#include <cfloat>
-#include <cstring>
-#include <cerrno>
-#include <clocale>
-#include <sys/time.h>
-#include <signal.h>
-#include <vector>
-#include <functional>
-
-#include <common/application_interface.h>
+#include <common/application_base.h>
 #include <common/event_manager.h>
 #include <common/log_messages.h>
 #include <common/basic.h>
@@ -70,13 +57,12 @@ public:
     }
 };
 
-class Application : public Application_Interface, public Application_Base
+class Application : public Application_Base
 {
 public:
-    Application(int argc, char **argv, Event_Manager &em)
-    : Application_Base("Robot Watch", 1600, 800)
+    Application(int argc, char** argv, Event_Manager& em)
+    : Application_Base(em, "Robot Watch", 1600, 800)
     , settings(argc, argv)
-    , event(em)
     , robot(settings.tcp_port, settings.robot_id, settings.scene_id, true)
     , control(robot)
     , parameter_set(1)
@@ -86,13 +72,8 @@ public:
     , robot_graphics(robot)
     , spinalcord_watch(robot, 200)
     , control_graphics(robot, control)
-    , cycles(0)
     , restore_state(true)
     {
-        /* register key event */
-        event.register_user_callback_key_pressed (std::bind(&Application::user_callback_key_pressed , this, std::placeholders::_1));
-        event.register_user_callback_key_released(std::bind(&Application::user_callback_key_released, this, std::placeholders::_1));
-
         if (settings.seedfile != "")
             parameter_set.add(settings.seedfile);
         else
@@ -104,14 +85,11 @@ public:
     bool loop();
     void finish();
     void draw(const pref&) const ;
-    uint64_t get_cycle_count(void) const { return cycles; }
-    bool visuals_enabled(void) { return true; }
-    void user_callback_key_pressed (SDL_Keysym &keysym);
-    void user_callback_key_released(SDL_Keysym &keysym);
+    void user_callback_key_pressed (SDL_Keysym& keysym);
+    void user_callback_key_released(SDL_Keysym& keysym);
 
 private:
     Settings                 settings;
-    Event_Manager&           event;
     robots::Simloid          robot;
     control::Jointcontrol    control;
     control::Control_Vector  parameter_set;
@@ -124,11 +102,6 @@ private:
     robots::Spinalcord_Watch       spinalcord_watch;
     control::Jointcontrol_Graphics control_graphics;
 
-
-    uint64_t                 cycles;
     bool                     restore_state;
     bool                     minimal = false;
 };
-
-#endif /*MAIN_H*/
-
