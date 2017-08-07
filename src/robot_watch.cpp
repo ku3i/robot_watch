@@ -29,7 +29,7 @@ Application::draw(const pref& p) const
 }
 
 void
-Application::user_callback_key_pressed(SDL_Keysym &keysym)
+Application::user_callback_key_pressed(const SDL_Keysym &keysym)
 {
     switch (keysym.sym)
     {
@@ -45,7 +45,7 @@ Application::user_callback_key_pressed(SDL_Keysym &keysym)
 }
 
 void
-Application::user_callback_key_released(SDL_Keysym &keysym)
+Application::user_callback_key_released(const SDL_Keysym &keysym)
 {
     puppet_master.key_released(keysym);
 }

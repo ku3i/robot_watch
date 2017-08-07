@@ -28,7 +28,7 @@ class Puppet_Master {
 public:
     Puppet_Master(robots::Simloid& robot, std::size_t num_bodies) : robot(robot), body_id(0), num_bodies(num_bodies), force(.0) {}
 
-    void key_pressed(SDL_Keysym &keysym) {
+    void key_pressed(const SDL_Keysym &keysym) {
         switch (keysym.sym) {
         case SDLK_LEFT : force.x = -10.0; break;
         case SDLK_RIGHT: force.x = +10.0; break;
@@ -43,7 +43,7 @@ public:
         robot.set_force(body_id, force);
     }
 
-    void key_released(SDL_Keysym& keysym) {
+    void key_released(const SDL_Keysym& keysym) {
         switch (keysym.sym) {
         case SDLK_LEFT : force.x = 0.0; break;
         case SDLK_RIGHT: force.x = 0.0; robot.set_force(0, force); break;
@@ -85,8 +85,8 @@ public:
     bool loop();
     void finish();
     void draw(const pref&) const ;
-    void user_callback_key_pressed (SDL_Keysym& keysym);
-    void user_callback_key_released(SDL_Keysym& keysym);
+    void user_callback_key_pressed (const SDL_Keysym& keysym);
+    void user_callback_key_released(const SDL_Keysym& keysym);
 
 private:
     Settings                 settings;
