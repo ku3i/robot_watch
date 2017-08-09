@@ -12,6 +12,7 @@
 
 #include <robots/robot.h>
 #include <robots/simloid.h>
+#include <robots/simloid_log.h>
 #include <robots/simloid_graphics.h>
 #include <robots/spinalcord_watch.h>
 
@@ -69,6 +70,7 @@ public:
     , joystick()
     , midi(1)
     , puppet_master(robot, robot.get_number_of_bodies())
+    , robot_log(robot)
     , robot_graphics(robot)
     , spinalcord_watch(robot, 200)
     , control_graphics(robot, control)
@@ -96,6 +98,9 @@ private:
     Joystick                 joystick;
     MidiIn                   midi;
     Puppet_Master            puppet_master;
+
+    /*logs*/
+    robots::Simloid_Log      robot_log;
 
     /* drawings */
     robots::Simloid_Graphics       robot_graphics;

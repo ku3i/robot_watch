@@ -67,6 +67,9 @@ Application::loop(void)
     simloid_status |= robot.update();
     midi.fetch();
 
+    /* data logging */
+    if (logger.is_enabled())
+        logger.log("%llu %s", cycles, robot_log.log());
 
     robot_graphics.execute_cycle();
     spinalcord_watch.execute_cycle(cycles);
