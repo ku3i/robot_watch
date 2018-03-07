@@ -76,8 +76,10 @@ public:
     , control_graphics(robot, control)
     , restore_state(true)
     {
-        if (settings.seedfile != "")
+        if (settings.seedfile != "") {
+            sts_msg("Adding behavior from file: %s", settings.seedfile.c_str());
             parameter_set.add(settings.seedfile);
+        }
         else
             parameter_set.add(initialize_anyhow(robot, control, true, settings.pdm, settings.seedfile));
 
@@ -86,6 +88,7 @@ public:
 
     bool loop();
     void finish();
+    void paused(void) { robot.idle(); }
     void draw(const pref&) const ;
     void user_callback_key_pressed (const SDL_Keysym& keysym);
     void user_callback_key_released(const SDL_Keysym& keysym);
