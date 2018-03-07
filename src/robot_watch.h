@@ -62,7 +62,7 @@ class Application : public Application_Base
 {
 public:
     Application(int argc, char** argv, Event_Manager& em)
-    : Application_Base(em, "Robot Watch", 1600, 800)
+    : Application_Base(argc, argv, em, "Robot Watch", 1600, 800)
     , settings(argc, argv)
     , robot(settings.tcp_port, settings.robot_id, settings.scene_id, true)
     , control(robot)

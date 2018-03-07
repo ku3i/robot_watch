@@ -1,0 +1,8 @@
+robot_id = 60
+scene_id = 0 
+tcp_port = 7654
+pdm = { 0.0 
+       -0.1
+        1.1 }
+
+

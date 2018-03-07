@@ -62,6 +62,8 @@ Application::loop(void)
         sts_msg("Restoring state.");
         restore_state = false;
     }
+    if (logger.is_video_included())
+        robot.record_next_frame();
 
     control.execute_cycle();
     simloid_status |= robot.update();
